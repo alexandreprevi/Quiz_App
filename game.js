@@ -14,29 +14,33 @@ let question3 = new Question('Food', 'Where does the "raclette" come from?', ['I
 
 const question = document.getElementById("question");
 const choices = Array.from(document.getElementsByClassName("choice-text"));
-const amountQuestion = document.getElementById("amountQuestion");
+
 const questionCounterText = document.getElementById("questionCounter");
 const category = document.getElementById("category");
 
 
+
+
+
+const displayResults = document.getElementById("results");
+
+
 /* Quiz Variables */
 let currentQuestion;
-let maxQuestion = 3;
 let questionCounter = 0;
 let correctAnswer = 0;
 let wrongAnswer = 0;
 let allQuestions = [question1, question2, question3];
 
-
-function getInfo(){
-    const userName = document.getElementById("userName").value;
-    const endText = document.getElementById("end");
-    endText.innerText = userName;
+function getUserInfo(){
+    const userName = document.getElementById("userName");
+    const amountQuestion = document.getElementById("amountQuestion");
 }
 
 
-
-function PlayQuiz() {
+function playQuiz() {
+    
+    getUserInfo();
     questionCounter = 0;
     wrongAnswer = 0;
     correctAnswer = 0;
@@ -45,14 +49,23 @@ function PlayQuiz() {
     displayNewQuestion();
 };
 
+
+
+
 function displayNewQuestion() {
-    if (questionCounter == maxQuestion) {
-        // End Game
-        return window.location.assign("/end.html");
+    if (questionCounter >= amountQuestion.value) {
+    // end game
+
+    // could create different text according to the result 10/10 = excellent, from 6/10 to 9/10 = good job, from 0/10 to 5/10 = better luck next time;
+    displayResults.innerText = `congrats ${userName.value}, you got ${correctAnswer} correct answers out of ${amountQuestion.value} questions!`;
+    
+    return;
+    
+
     }
     // update question counter
     questionCounter++;
-    questionCounterText.innerText = questionCounter + "/" + maxQuestion;
+    questionCounterText.innerText = questionCounter + "/" + amountQuestion.value;
 
     // get question
     currentQuestion = allQuestions[questionIndex];
@@ -65,7 +78,6 @@ function displayNewQuestion() {
     for (let i = 0; i < choices.length; i++) {
         choices[i].innerText = currentQuestion.choices[i];
     }
-
     questionIndex++;
 };
 
@@ -90,12 +102,6 @@ for (let i = 0; i < choices.length; i++) {
             choices[i].classList.remove(classToApply);
             displayNewQuestion();
         }, 1000);
-       
-        console.log(correctAnswer);
-        console.log(wrongAnswer);
 
     });
 };
-
-
-PlayQuiz();
