@@ -12,10 +12,13 @@
         <div id="homeMenu" class="flex-center flex-column">
             <h1>Quiz</h1>
             <label for="userName">Name:</label>
-            <input type="text">
+            <input type="text" class="text-center" value="Unknown">
             <label for="amountQuestions">How many questions do you want?</label>
-            <input type="number">
-            <a class="btn" href="game.html">Start</a>
+            <input type="number" class="text-center" id="amountQuestion" value="1">
+            <form action="/game.html">
+                <button type="submit" class="btn">Start</button>
+            </form>
+            
         </div>
     </div>
     
