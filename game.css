@@ -22,4 +22,13 @@
 
 .choice-text{
     padding: 1.5rem;
+    width: 100%;
+}
+
+.correct{
+    background-color: #2EC4B6;
+}
+
+.incorrect{
+    background-color: #E71D36;
 }
