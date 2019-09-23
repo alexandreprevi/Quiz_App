@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,20 +8,21 @@
     <title>Quiz Application</title>
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
     <div class="container">
         <div id="homeMenu" class="flex-center flex-column">
             <h1>Quiz</h1>
             <label for="userName">Name:</label>
-            <input type="text" class="text-center" value="Unknown">
+            <input type="text" class="text-center" id="userName" value="Unknown">
             <label for="amountQuestions">How many questions do you want?</label>
             <input type="number" class="text-center" id="amountQuestion" value="1">
-            <form action="/game.html">
-                <button type="submit" class="btn">Start</button>
-            </form>
-            
+           <!--  <form action="/game.html"> -->
+                <button type="submit" class="btn" onclick="savePlayerInfo();">Start</button>
+            <!-- </form> --> 
         </div>
     </div>
-    
+    <script src="index.js"></script>
 </body>
+
 </html>

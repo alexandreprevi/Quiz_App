@@ -32,3 +32,23 @@
 .incorrect{
     background-color: #E71D36;
 }
+
+/* Question Info */
+
+#questionInfo{
+    display: flex;
+    justify-content: space-between;
+}
+
+.questionInfo-prefix{
+    text-align: center;
+    font-size: 2rem;
+}
+
+.questionInfo-main-text{
+    text-align: center;
+}
+
+#category{
+    font-size: 4rem;
+}

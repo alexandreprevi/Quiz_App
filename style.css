@@ -44,6 +44,12 @@ label{
     padding: 1rem;
 }
 
+input{
+    border: none;
+    box-shadow: 0 0.1rem 1rem 0 rgba(255, 191, 52, 0.5);
+}
+
+
 /* */
 
 .container{

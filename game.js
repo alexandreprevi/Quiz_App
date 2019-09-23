@@ -15,6 +15,8 @@ let question3 = new Question('Food', 'Where does the "raclette" come from?', ['I
 const question = document.getElementById("question");
 const choices = Array.from(document.getElementsByClassName("choice-text"));
 const amountQuestion = document.getElementById("amountQuestion");
+const questionCounterText = document.getElementById("questionCounter");
+const category = document.getElementById("category");
 
 
 /* Quiz Variables */
@@ -26,6 +28,11 @@ let wrongAnswer = 0;
 let allQuestions = [question1, question2, question3];
 
 
+function getInfo(){
+    const userName = document.getElementById("userName").value;
+    const endText = document.getElementById("end");
+    endText.innerText = userName;
+}
 
 
 
@@ -43,14 +50,22 @@ function displayNewQuestion() {
         // End Game
         return window.location.assign("/end.html");
     }
+    // update question counter
     questionCounter++;
+    questionCounterText.innerText = questionCounter + "/" + maxQuestion;
+
+    // get question
     currentQuestion = allQuestions[questionIndex];
     question.innerText = currentQuestion.question;
+
+    // get category of this question
+    category.innerText = currentQuestion.category;
 
     // get the possible choices for this question
     for (let i = 0; i < choices.length; i++) {
         choices[i].innerText = currentQuestion.choices[i];
     }
+
     questionIndex++;
 };
 
@@ -63,6 +78,9 @@ for (let i = 0; i < choices.length; i++) {
 
         if (choices[i].innerText == currentQuestion.answer) {
             classToApply = 'correct';
+            correctAnswer++;
+        } else {
+            wrongAnswer++;
         }
 
         choices[i].classList.add(classToApply);
@@ -73,6 +91,8 @@ for (let i = 0; i < choices.length; i++) {
             displayNewQuestion();
         }, 1000);
        
+        console.log(correctAnswer);
+        console.log(wrongAnswer);
 
     });
 };
