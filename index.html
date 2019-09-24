@@ -1,26 +1,75 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Quiz Application</title>
     <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css?family=Amatic+SC&display=swap" rel="stylesheet">
 </head>
+
 <body>
-    <div class="container">
-        <div id="homeMenu" class="flex-center flex-column">
+    <div class="container-general">
+        <!-- Home Menu -->
+        <div id="homeMenu" class="container flex-center flex-column">
             <h1>Quiz</h1>
             <label for="userName">Name:</label>
-            <input type="text" class="text-center" value="Unknown">
-            <label for="amountQuestions">How many questions do you want?</label>
-            <input type="number" class="text-center" id="amountQuestion" value="1">
-            <form action="/game.html">
-                <button type="submit" class="btn">Start</button>
+            <input type="text" class="text-center" id="userName" placeholder="Unknown" value="Unknown">
+            <label for="amountQuestion">How many questions do you want?</label>
+            <input type="number" class="text-center" id="amountQuestion" value="1" min="1" max="10">
+            <button type="submit" class="btn" onclick="playQuiz();">Start</button>
+        </div>
+
+        <!-- Game Display-->
+        <div id="game" class="container justify-center flex-column">
+            <div id="questionInfo" class="space-between">
+                <div id="questionInfo-item">
+                    <p class="questionInfo-prefix">
+                        Question
+                    </p>
+                    <h1 class="questionInfo-main-text" id="questionCounter"></h1>
+                </div>
+                <div id="questionInfo-item">
+                    <p class="questionInfo-prefix">
+                        Category
+                    </p>
+                    <h1 class="questionInfo-main-text" id="category">
+                        ?
+                    </h1>
+                </div>
+                
+            </div>
+            <h2 id="question">What is the correct answer?</h2>
+            <div class="choice-container">
+                <p class="choice-prefix">A</p>
+                <p class="choice-text">Choice 1</p>
+            </div>
+            <div class="choice-container">
+                <p class="choice-prefix">B</p>
+                <p class="choice-text">Choice 2</p>
+            </div>
+            <div class="choice-container">
+                <p class="choice-prefix">C</p>
+                <p class="choice-text">Choice 3</p>
+            </div>
+            <div class="choice-container">
+                <p class="choice-prefix">D</p>
+                <p class="choice-text">Choice 4</p>
+            </div>
+        </div>
+
+        <!-- Game Over-->
+        <div id="end" class="container flex-center flex-column">
+            <h2>The Quiz is Over</h2>
+            <p id="results"></p>
+            <form action="/index.html">
+                <button type="submit" class="btn">Home</button>
             </form>
-            
         </div>
     </div>
-    
+    <script src="game.js"></script>
 </body>
+
 </html>
