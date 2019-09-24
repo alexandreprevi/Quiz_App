@@ -26,7 +26,8 @@ const choices = Array.from(document.getElementsByClassName("choice-text"));
 const questionCounterText = document.getElementById("questionCounter");
 const category = document.getElementById("category");
 
-const displayResults = document.getElementById("results");
+const displayResultsMain = document.getElementById("results-main");
+const displayResultsP = document.getElementById("results-p");
 
 
 /* Quiz Variables */
@@ -34,13 +35,12 @@ let currentQuestion;
 let questionCounter = 0;
 let correctAnswer = 0;
 let wrongAnswer = 0;
-let allQuestions = [question1, question2, question3];
+let allQuestions = [question1, question2, question3, question4, question5, question6, question7, question8, question9, question10];
 
 function getUserInfo(){
     const userName = document.getElementById("userName");
     const amountQuestion = document.getElementById("amountQuestion");
 }
-
 
 function playQuiz() {
     
@@ -53,17 +53,24 @@ function playQuiz() {
     displayNewQuestion();
 };
 
-
-
 function displayNewQuestion() {
     if (questionCounter >= amountQuestion.value) {
     // end game
-
-    // could create different text according to the result 10/10 = excellent, from 6/10 to 9/10 = good job, from 0/10 to 5/10 = better luck next time;
-    displayResults.innerText = `congrats ${userName.value}, you got ${correctAnswer} correct answers out of ${amountQuestion.value} questions!`;
     
+    if(correctAnswer == amountQuestion.value){
+        // excellent 10 / 10
+        displayResultsMain.innerText = "Excellent!"
+    } else if ((correctAnswer / amountQuestion.value) <= 0.9 && (correctAnswer / amountQuestion.value) >= 0.5) {
+        // good job from 05 / 10 to 09 / 10
+        displayResultsMain.innerText = "Good job!"
+    } else {
+        // could be better from 01 / 10 to 04 / 10
+        displayResultsMain.innerText  = "Better luck next time!"
+    }
+    displayResultsP.innerText = `${userName.value}, you got ${correctAnswer} correct answers out of ${amountQuestion.value} questions!`;
     return;
     }
+
     // update question counter
     questionCounter++;
     questionCounterText.innerText = questionCounter + "/" + amountQuestion.value;
@@ -79,14 +86,17 @@ function displayNewQuestion() {
     for (let i = 0; i < choices.length; i++) {
         choices[i].innerText = currentQuestion.choices[i];
     }
+    // update question counter
     questionIndex++;
 };
 
 /* Event Listener */
 
+// Listen to the player answer
 for (let i = 0; i < choices.length; i++) {
     choices[i].addEventListener("click", function () {
 
+        // Apply class correct or incorrect according to player answer
         let classToApply = 'incorrect';
 
         if (choices[i].innerText == currentQuestion.answer) {
