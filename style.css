@@ -144,14 +144,6 @@ input{
     width: 100%;
 }
 
-.correct{
-    background-color: #2EC4B6;
-}
-
-.incorrect{
-    background-color: #E71D36;
-}
-
 /* Question Info */
 
 .space-between{
