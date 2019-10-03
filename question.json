@@ -1,0 +1,62 @@
+[
+    {
+        "category": "Geography",
+        "question": "What city is the capital city of France?",
+        "choices": ["Paris", "Bordeaux", "Lyon", "Marseille"],
+        "answer": "Paris"
+    },
+    {
+        "category": "History",
+        "question": "When took place the french revolution?",
+        "choices": ["1883", "1783", "1789", "1879"],
+        "answer": "1789"
+    },
+    {
+        "category": "Food",
+        "question": "Where does the 'raclette' come from?",
+        "choices": ["Italy", "France", "Switzerland", "Austria"],
+        "answer": "Switzerland"
+    },
+    {
+        "category": "Sport",
+        "question": "Where was the 1986 World Cup held?",
+        "choices": ["Rio de Janeiro", "Mexico", "Buenos Aires", "Sao Paulo"],
+        "answer": "Mexico"
+    },
+    {
+        "category": "Animals",
+        "question": "Hammerhead and cookie-cutter are types of which large cartilaginous fish?",
+        "choices": ["Shark", "Dolphin", "Whale", "Orca"],
+        "answer": "Shark"
+    },
+    {
+        "category": "Geography",
+        "question": "What is the USA state capital of California?",
+        "choices": ["San Fransisco", "Sacramento", "Los Angeles", "San Diego"],
+        "answer": "Sacramento"
+    },
+    {
+        "category": "General knowledge",
+        "question": "Which artist painted The Potato Eaters?",
+        "choices": ["Claude Monet", "Rembrandt", "Vincent Van Gogh", "Leonardo Da Vinci"],
+        "answer": "Vincent Van Gogh"
+    },
+    {
+        "category": "Mythology",
+        "question": "How many labours were performed by Hercules?",
+        "choices": ["ten", "eleven", "twelve", "thirteen"],
+        "answer": "twelve"
+    },
+    {
+        "category": "Language",
+        "question": "What does the latin prefix 'dino' (as in dinosaur) mean?",
+        "choices": ["Giant", "Noisy", "Old", "Terrible"],
+        "answer": "Terrible"
+    },
+    {
+        "category": "Mathematics",
+        "question": "The area of a circle with a radius of 56.5cms is approximately how many square meters?",
+        "choices": ["1", "3", "5", "10"],
+        "answer": "1"
+    }
+]

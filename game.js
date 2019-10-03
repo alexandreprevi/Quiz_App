@@ -5,19 +5,19 @@ class Question {
         this.choices = choices;
         this.answer = answer;
     }
+
 }
 
-let question1 = new Question('Geography', 'What city is the capital city of France?', ['Paris', 'Bordeaux', 'Lyon', 'Marseille'], 'Paris');
-let question2 = new Question("History", 'When took place the french revolution?', ['1883', '1783', '1789', '1879'], '1789');
-let question3 = new Question('Food', 'Where does the "raclette" come from?', ['Italy', 'France', 'Switzerland', 'Austria'], 'Switzerland');
-let question4 = new Question('Sport', 'Where was the 1986 World Cup held?', ['Rio de Janeiro', 'Mexico', 'Buenos Aires', 'Sao Paulo'], 'Mexico');
-let question5 = new Question('Animals', 'Hammerhead and cookie-cutter are types of which large cartilaginous fish?', ['Shark', 'Dolphin', 'Whale', 'Orca'], 'Shark');
-let question6 = new Question('General knowledge', 'Which artist painted The Potato Eaters?', ['Claude Monet', 'Rembrandt', 'Vincent Van Gogh', 'Leonardo Da Vinci'], 'Vincent Van Gogh');
-let question7 = new Question('Mythology', 'How many labours were performed by Hercules?', ['ten', 'eleven', 'twelve', 'thirteen'], 'twelve');
-let question8 = new Question('Geography', 'What is the USA state capital of California?', ['San Fransisco', 'Sacramento', 'Los Angeles', 'San Diego'], 'Sacramento');
-let question9 = new Question('Language', 'What does the latin prefix "dino" (as in dinosaur) mean?', ['Giant', 'Noisy', 'Old', 'Terrible'], 'Terrible');
-let question10 = new Question('Mathematics', 'The area of a circle with a radius of 56.5cms is approximately how many square meters?' ['1', '3', '5', '10'], '1');
 
+let allQuestions = [];
+
+
+let json = getJSON('http://www.mocky.io/v2/5d9602fa330000869a2f8e7e');
+
+for (let question of json) {
+    let x = new Question(question.category, question.question, question.choices, question.answer);
+    allQuestions.push(x);
+}
 
 
 const question = document.getElementById("question");
@@ -30,12 +30,11 @@ const displayResultsMain = document.getElementById("results-main");
 const displayResultsP = document.getElementById("results-p");
 
 
-/* Quiz Variables */
+///// Quiz Variables /////
 let currentQuestion;
 let questionCounter = 0;
 let correctAnswer = 0;
 let wrongAnswer = 0;
-let allQuestions = [question1, question2, question3, question4, question5, question6, question7, question8, question9, question10];
 
 function getUserInfo(){
     const userName = document.getElementById("userName");
@@ -90,7 +89,7 @@ function displayNewQuestion() {
     questionIndex++;
 };
 
-/* Event Listener */
+///// Event Listener /////
 
 // Listen to the player answer
 for (let i = 0; i < choices.length; i++) {
@@ -116,3 +115,5 @@ for (let i = 0; i < choices.length; i++) {
 
     });
 };
+
+
