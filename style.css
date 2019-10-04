@@ -30,7 +30,7 @@ h1 > span{
 }
 
 h2{
-    font-size: 4.2rem;
+    font-size: 2.5rem;
     margin-bottom: 4rem;
     font-weight: 700;
 }
@@ -42,6 +42,7 @@ h3{
 
 label{
     padding: 1rem;
+    font-size: 1.5rem;
 }
 
 input{
@@ -144,6 +145,10 @@ input{
     width: 100%;
 }
 
+.selected{
+    border: 0.2rem solid rgba(86, 185, 235, 1);
+}
+
 /* Question Info */
 
 .space-between{
@@ -154,19 +159,36 @@ input{
 
 .questionInfo-prefix{
     text-align: center;
-    font-size: 2rem;
+    font-size: 1.5rem;
 }
 
 .questionInfo-main-text{
     text-align: center;
+    font-size: 4rem;
 }
 
 #category{
-    font-size: 4rem;
+    font-size: 3rem;
 }
 
 /* When Game is Over */
 
 p#results-p{
     font-size: 1.6rem;
+}
+
+
+@media screen and (min-width: 576px){
+    .questionInfo-prefix{
+        text-align: center;
+        font-size: 2rem;
+    }
+    #category{
+        font-size: 4rem;
+    }
+    h2{
+        font-size: 4.2rem;
+        margin-bottom: 4rem;
+        font-weight: 700;
+    }
 }
