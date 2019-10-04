@@ -2,14 +2,14 @@ class Quiz {
     constructor(userName, amountQuestion) {
         this.allQuestions = [];
         this.correctAnswer = 0;
-        this.wrongAnswer = 0;
         this.currentQuestion;
         this.questionCounter = 0;
         this.questionIndex = 0;
         this.userName = userName;
         this.amountQuestion = amountQuestion;
     }
-    displayNewQuestion() {
+    
+    displayQuiz() {
 
         if (this.questionCounter >= this.amountQuestion.value) {
 
@@ -33,7 +33,7 @@ class Quiz {
             questionCounterText.innerText = this.questionCounter + "/" + this.amountQuestion.value;
 
             // get question
-            this.currentQuestion = quiz1.allQuestions[this.questionIndex];
+            this.currentQuestion = this.allQuestions[this.questionIndex];
             question.innerText = this.currentQuestion.question;
 
             // get category of this question
@@ -49,6 +49,58 @@ class Quiz {
             this.questionIndex++;
         }
     };
+
+    checkAnswers(){
+        
+    let arrayToCompare = [];
+
+    // create an array with the selected answers
+    for (let i = 0; i < choices.length; i++) {
+        if (choices[i].classList.contains("selected")) {
+            arrayToCompare.push(choices[i].innerText);
+        }
+    }
+    // Compare answer of user and correct answer
+
+    // Compare the size of the 2 arrays
+    if (this.currentQuestion.answer.length != arrayToCompare.length) {
+        
+    } else {
+        // sort the arrays
+        this.currentQuestion.answer.sort();
+        arrayToCompare.sort();
+
+        // Compare the answer and add points only if all is ok
+
+        let gotWrong = false;
+        let gotTrue = false;
+        for (let i = 0; i < arrayToCompare.length; i++) {
+
+            if (this.currentQuestion.answer[i] != arrayToCompare[i]) {
+                gotWrong = true;
+            } else {
+                gotTrue = true;
+            }
+        }
+
+        if (gotTrue == true && gotWrong == false) {
+            console.log("Correct!!");
+            this.correctAnswer++;
+        }
+    }
+
+    // Reset array and remove class selected for next question
+    arrayToCompare = [];
+    for (let i = 0; i < choices.length; i++) {
+        choices[i].classList.remove("selected");
+    }
+    }
+
+    playQuiz() {
+        getInputs();
+        this.displayQuiz();
+    };
+    
 }
 
 class Question {
@@ -60,25 +112,12 @@ class Question {
     }
 }
 
-function playQuiz() {
-    getInputs();
-    quiz1.displayNewQuestion();
-};
 
 function getInputs() {
     userName = document.getElementById("userName").value;
     amountQuestion = document.getElementById("amountQuestion").value;
 };
 
-
-
-let quiz1 = new Quiz(userName, amountQuestion);
-let json = getJSON('http://www.mocky.io/v2/5d964b4033000077962f9037');
-
-for (let question of json) {
-    let x = new Question(question.category, question.question, question.choices, question.answer);
-    quiz1.allQuestions.push(x);
-}
 
 
 const question = document.getElementById("question");
@@ -88,9 +127,16 @@ const category = document.getElementById("category");
 const displayResultsMain = document.getElementById("results-main");
 const displayResultsP = document.getElementById("results-p");
 const nextButton = document.getElementById("next-button");
-const prevButton = document.getElementById("previous-button");
 
-let arrayToCompare = [];
+
+let quiz1 = new Quiz(userName, amountQuestion);
+let json = getJSON('http://www.mocky.io/v2/5d97098b3b00001100c3134e');
+
+for (let question of json) {
+    let x = new Question(question.category, question.question, question.choices, question.answer);
+    quiz1.allQuestions.push(x);
+}
+
 
 
 ///// Event Listener /////
@@ -108,87 +154,10 @@ for (let i = 0; i < choices.length; i++) {
 
 nextButton.addEventListener("click", function () {
 
-    
-    console.log(quiz1.currentQuestion.answer);
-    // create an array with the selected answers
-    for (let i = 0; i < choices.length; i++) {
-        if (choices[i].classList.contains("selected")) {
-            arrayToCompare.push(choices[i].innerText);
-        }
-    }
-    console.log(arrayToCompare);
-    // Compare answer of user and correct answer
-    if (quiz1.currentQuestion.answer == arrayToCompare) {
-        quiz1.correctAnswer++;
-    } else {
-        quiz1.wrongAnswer++;
-    }
-
-    // Reset array and remove class selected for next question
-    arrayToCompare = [];
-    for (let i = 0; i < choices.length; i++) {
-        choices[i].classList.remove("selected");
-    }
-
+    // Check the user answers
+    quiz1.checkAnswers();
     // Display the next question
-    quiz1.displayNewQuestion();
+    quiz1.displayQuiz();
 });
 
-
-
-/* prevButton.addEventListener("click", function (){
-    quiz1.questionCounter-=2;
-    quiz1.questionIndex-=2;
-    quiz1.displayNewQuestion();
-}); */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* // Listen to the player answer
-for (let i = 0; i < choices.length; i++) {
-    choices[i].addEventListener("click", function () {
-
-        // Apply class correct or incorrect according to player answer
-        let classToApply = 'incorrect';
-
-        if (choices[i].innerText == quiz1.currentQuestion.answer) {
-            classToApply = 'correct';
-            quiz1.correctAnswer++;
-        } else {
-            quiz1.wrongAnswer++;
-        }
-
-        choices[i].classList.add(classToApply);
-
-        // animation for right/wrong answers with set timeout
-        setTimeout(() => {
-            choices[i].classList.remove(classToApply);
-            quiz1.displayNewQuestion();
-        }, 1000);
-
-    });
-};
- */
 
