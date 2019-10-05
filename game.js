@@ -1,3 +1,122 @@
+class Quiz {
+    constructor(userName, amountQuestion) {
+        this.allQuestions = [];
+        this.correctAnswer = 0;
+        this.currentQuestion;
+        this.questionCounter = 0;
+        this.questionIndex = 0;
+        this.userName = userName;
+        this.amountQuestion = amountQuestion;
+    }
+
+    startDisplay(){
+        homeMenu.style.display = "flex";
+        game.style.display = "none";
+        end.style.display = "none";
+    }
+
+    gameDisplay(){
+        game.style.display = "flex"; 
+        homeMenu.style.display = "none";
+        end.style.display = "none";
+    }
+
+    endDisplay(){
+        end.style.display = "flex";
+        homeMenu.style.display = "none";
+        game.style.display = "none";
+    }
+
+    updateQuiz() {
+        this.questionCounter >= this.amountQuestion.value ? this.endOfQuiz() : this.updateQuestion();
+    }
+
+    checkAnswers() {
+
+        let arrayToCompare = [];
+
+        // create an array with the selected answers
+        for (let i = 0; i < choices.length; i++) {
+            if (choices[i].classList.contains("selected")) {
+                arrayToCompare.push(choices[i].innerText);
+            }
+        }
+        // Compare answer of user and correct answer
+
+        // Compare the size of the 2 arrays
+        if (this.currentQuestion.answer.length != arrayToCompare.length) {
+
+        } else {
+            // sort the arrays
+            this.currentQuestion.answer.sort();
+            arrayToCompare.sort();
+
+            // Compare the answer and add points only if all is ok
+
+            let gotWrong = false;
+            let gotTrue = false;
+            for (let i = 0; i < arrayToCompare.length; i++) {
+
+                if (this.currentQuestion.answer[i] != arrayToCompare[i]) {
+                    gotWrong = true;
+                } else {
+                    gotTrue = true;
+                }
+            }
+
+            if (gotTrue == true && gotWrong == false) {
+                console.log("Correct!!");
+                this.correctAnswer++;
+            }
+        };
+
+        // Reset array and remove class selected for next question
+        arrayToCompare = [];
+        for (let i = 0; i < choices.length; i++) {
+            choices[i].classList.remove("selected");
+        }
+    }
+
+    playQuiz() {
+        getInputs();
+        this.gameDisplay();
+        this.updateQuiz();
+    }
+
+    endOfQuiz() {
+        this.endDisplay();
+        // end of game results
+        this.correctAnswer == this.amountQuestion.value ? displayResultsMain.innerText = "Excellent!" :
+            (this.correctAnswer / this.amountQuestion.value) <= 0.9 && (this.correctAnswer / this.amountQuestion.value) >= 0.5 ? displayResultsMain.innerText = "Good job!" :
+                displayResultsMain.innerText = "Better luck next time!";
+
+        displayResultsP.innerText = `${this.userName.value}, you got ${this.correctAnswer} correct answers out of ${this.amountQuestion.value} questions!`;
+    }
+
+    updateQuestion() {
+
+        // update question counter
+        this.questionCounter++;
+        questionCounterText.innerText = this.questionCounter + "/" + this.amountQuestion.value;
+
+        // get question
+        this.currentQuestion = this.allQuestions[this.questionIndex];
+        question.innerText = this.currentQuestion.question;
+
+        // get category of this question
+        category.innerText = this.currentQuestion.category;
+
+        // get the possible choices for this question
+        for (let i = 0; i < choices.length; i++) {
+            choices[i].innerText = this.currentQuestion.choices[i];
+        }
+
+        // update question index
+        this.questionIndex++;
+    }
+
+}
+
 class Question {
     constructor(category, question, choices, answer) {
         this.category = category;
@@ -7,102 +126,53 @@ class Question {
     }
 }
 
-let question1 = new Question('Geography', 'What city is the capital city of France?', ['Paris', 'Bordeaux', 'Lyon', 'Marseille'], 'Paris');
-let question2 = new Question("History", 'When took place the french revolution?', ['1883', '1783', '1789', '1879'], '1789');
-let question3 = new Question('Food', 'Where does the "raclette" come from?', ['Italy', 'France', 'Switzerland', 'Austria'], 'Switzerland');
-let question4 = new Question('Sport', 'Where was the 1986 World Cup held?', ['Rio de Janeiro', 'Mexico', 'Buenos Aires', 'Sao Paulo'], 'Mexico');
-let question5 = new Question('Animals', 'Hammerhead and cookie-cutter are types of which large cartilaginous fish?', ['Shark', 'Dolphin', 'Whale', 'Orca'], 'Shark');
-let question6 = new Question('General knowledge', 'Which artist painted The Potato Eaters?', ['Claude Monet', 'Rembrandt', 'Vincent Van Gogh', 'Leonardo Da Vinci'], 'Vincent Van Gogh');
-let question7 = new Question('Mythology', 'How many labours were performed by Hercules?', ['ten', 'eleven', 'twelve', 'thirteen'], 'twelve');
-let question8 = new Question('Geography', 'What is the USA state capital of California?', ['San Fransisco', 'Sacramento', 'Los Angeles', 'San Diego'], 'Sacramento');
-let question9 = new Question('Language', 'What does the latin prefix "dino" (as in dinosaur) mean?', ['Giant', 'Noisy', 'Old', 'Terrible'], 'Terrible');
-let question10 = new Question('Mathematics', 'The area of a circle with a radius of 56.5cms is approximately how many square meters?' ['1', '3', '5', '10'], '1');
+function getInputs() {
+    userName = document.getElementById("userName").value;
+    amountQuestion = document.getElementById("amountQuestion").value;
+};
 
-
+// CONSTANTS //
 
 const question = document.getElementById("question");
 const choices = Array.from(document.getElementsByClassName("choice-text"));
-
 const questionCounterText = document.getElementById("questionCounter");
 const category = document.getElementById("category");
+const displayResultsMain = document.getElementById("results-main");
+const displayResultsP = document.getElementById("results-p");
+const nextButton = document.getElementById("next-button");
+const homeMenu = document.getElementById("homeMenu");
+const game = document.getElementById("game");
+const end = document.getElementById("end");
 
-const displayResults = document.getElementById("results");
+// Set display
+game.style.display = "none";
+end.style.display = "none";
 
+let quiz = new Quiz(userName, amountQuestion);
+let json = getJSON('http://www.mocky.io/v2/5d97098b3b00001100c3134e');
 
-/* Quiz Variables */
-let currentQuestion;
-let questionCounter = 0;
-let correctAnswer = 0;
-let wrongAnswer = 0;
-let allQuestions = [question1, question2, question3];
-
-function getUserInfo(){
-    const userName = document.getElementById("userName");
-    const amountQuestion = document.getElementById("amountQuestion");
+for (let question of json) {
+    let x = new Question(question.category, question.question, question.choices, question.answer);
+    quiz.allQuestions.push(x);
 }
 
+// EVENT LISTENERS //
 
-function playQuiz() {
-    
-    getUserInfo();
-    questionCounter = 0;
-    wrongAnswer = 0;
-    correctAnswer = 0;
-    questionIndex = 0;
-
-    displayNewQuestion();
-};
-
-
-
-function displayNewQuestion() {
-    if (questionCounter >= amountQuestion.value) {
-    // end game
-
-    // could create different text according to the result 10/10 = excellent, from 6/10 to 9/10 = good job, from 0/10 to 5/10 = better luck next time;
-    displayResults.innerText = `congrats ${userName.value}, you got ${correctAnswer} correct answers out of ${amountQuestion.value} questions!`;
-    
-    return;
-    }
-    // update question counter
-    questionCounter++;
-    questionCounterText.innerText = questionCounter + "/" + amountQuestion.value;
-
-    // get question
-    currentQuestion = allQuestions[questionIndex];
-    question.innerText = currentQuestion.question;
-
-    // get category of this question
-    category.innerText = currentQuestion.category;
-
-    // get the possible choices for this question
-    for (let i = 0; i < choices.length; i++) {
-        choices[i].innerText = currentQuestion.choices[i];
-    }
-    questionIndex++;
-};
-
-/* Event Listener */
-
+// Listen to the player answer
 for (let i = 0; i < choices.length; i++) {
     choices[i].addEventListener("click", function () {
 
-        let classToApply = 'incorrect';
-
-        if (choices[i].innerText == currentQuestion.answer) {
-            classToApply = 'correct';
-            correctAnswer++;
-        } else {
-            wrongAnswer++;
-        }
-
-        choices[i].classList.add(classToApply);
-
-        // animation for right/wrong answers with set timeout
-        setTimeout(() => {
-            choices[i].classList.remove(classToApply);
-            displayNewQuestion();
-        }, 1000);
-
+        // add class to selected answer
+        choices[i].classList.toggle("selected");
     });
 };
+
+// Next Button
+nextButton.addEventListener("click", function () {
+    // Check the user answers
+    quiz.checkAnswers();
+    // Display the next question
+    quiz.updateQuiz();
+});
+
+

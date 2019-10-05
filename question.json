@@ -1,0 +1,62 @@
+[
+    {
+        "category": "Geography",
+        "question": "Which ones of those cities are biggest in population?",
+        "choices": ["Paris", "Bordeaux", "Lyon", "Marseille"],
+        "answer": ["Paris", "Lyon"]
+    },
+    {
+        "category": "Technology",
+        "question": "Who were the founders of the Apple company?",
+        "choices": ["Bill Gates", "Steve Jobs", "Steve Wozniak", "Ronald Wayne"],
+        "answer": ["Steve Jobs", "Steve Wozniak", "Ronald Wayne"]
+    },
+    {
+        "category": "Colors",
+        "question": "What colors can you find in a rainbow",
+        "choices": ["Red", "Blue", "Pink", "Indigo"],
+        "answer": ["Red", "Blue", "Indigo"]
+    },
+    {
+        "category": "Sport",
+        "question": "Wich ones of those countries won more than 3 FIFA world cups?",
+        "choices": ["France", "Germany", "Uruguay", "Italy"],
+        "answer": ["Germany", "Italy"]
+    },
+    {
+        "category": "Language",
+        "question": "Which are the top 3 of most spoken languages in the world?",
+        "choices": ["Spanish", "English", "Madarin Chinese", "Hindustani"],
+        "answer": ["English", "Madarin Chinese", "Hindustani"]
+    },
+    {
+        "category": "Geography",
+        "question": "Which ones of those countries has white color on their flag?",
+        "choices": ["Germany", "Spain", "Greece", "Norway"],
+        "answer": ["Greece", "Norway"]
+    },
+    {
+        "category": "Animals",
+        "question": "Wich ones of those animals are mammals?",
+        "choices": ["Whale", "Lion", "Snake", "Kameleon"],
+        "answer": ["Whale","Lion"]
+    },
+    {
+        "category": "Politics",
+        "question": "Which ones of those countries have nuclear weapons?",
+        "choices": ["France", "North Korea", "India", "Pakistan"],
+        "answer": ["France", "North Korea", "India", "Pakistan"]
+    },
+    {
+        "category": "Pop Culture",
+        "question": "Which ones of those are Pokemons?",
+        "choices": ["Caterpie", "Suricate", "Rattata", "Raticate"],
+        "answer": ["Caterpie", "Rattata", "Raticate"]
+    },
+    {
+        "category": "Religion",
+        "question": "Which ones of those are sins according to the Catholic Church?",
+        "choices": ["Greed", "Lust", "Jalousy", "Anger"],
+        "answer": ["Greed", "Lust"]
+    }
+]
