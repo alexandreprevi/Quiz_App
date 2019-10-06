@@ -1,9 +1,9 @@
 [
     {
         "category": "Geography",
-        "question": "Which ones of those cities are biggest in population?",
+        "question": "What is the capital city of France?",
         "choices": ["Paris", "Bordeaux", "Lyon", "Marseille"],
-        "answer": ["Paris", "Lyon"]
+        "answer": ["Paris"]
     },
     {
         "category": "Technology",
@@ -13,13 +13,13 @@
     },
     {
         "category": "Colors",
-        "question": "What colors can you find in a rainbow",
+        "question": "What colors can't you find in a rainbow?",
         "choices": ["Red", "Blue", "Pink", "Indigo"],
-        "answer": ["Red", "Blue", "Indigo"]
+        "answer": ["Pink"]
     },
     {
         "category": "Sport",
-        "question": "Wich ones of those countries won more than 3 FIFA world cups?",
+        "question": "Which countries won more than 3 FIFA world cups?",
         "choices": ["France", "Germany", "Uruguay", "Italy"],
         "answer": ["Germany", "Italy"]
     },
