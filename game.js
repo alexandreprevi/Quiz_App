@@ -65,7 +65,6 @@ class Quiz {
             }
 
             if (gotTrue == true && gotWrong == false) {
-                console.log("Correct!!");
                 this.correctAnswer++;
             }
         };
@@ -148,9 +147,11 @@ const end = document.getElementById("end");
 game.style.display = "none";
 end.style.display = "none";
 
+// Create a Quiz objekt
 let quiz = new Quiz(userName, amountQuestion);
-let json = getJSON('http://www.mocky.io/v2/5d97098b3b00001100c3134e');
 
+// Use the JSON file to create questions objekt
+let json = getJSON('http://www.mocky.io/v2/5d9a52b4310000921297da97');
 for (let question of json) {
     let x = new Question(question.category, question.question, question.choices, question.answer);
     quiz.allQuestions.push(x);
